@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+
+Вход на сайт
+{% endblock %}
+{% block content %}
+
+
+<div class="create_user">
+    <div class="gen">
+        <h1>Вход</h1>
+
+{% if user.is_authenticated %}
+<p>Вы уже выполнили вход</p>
+{% else %}
+<div><form action="" method="POST">
+    {% csrf_token %}
+    <p> {{ form.username.label_tag }} {{ form.username  }} </p>
+            <p class="form_error">{{ form.username.errors.as_text }}</p>
+            <p> {{ form.email.label_tag }} {{ form.email  }} &#160; {{ form.email.help_text }} </p>
+            <p class="form_error">{{ form.email.errors }}</p>
+            <p> {{ form.password.label_tag }} {{ form.password  }} </p>
+            <p class="form_error">{{ form.password.errors.as_text }}</p>
+                <button class="myButton_reg">Вход</button>
+                <input type="reset" class="myButton_reg">
+</form></div>
+{% endif %}
+        </div></div>
+{% endblock %}
+{% block info %}
+{% endblock %}
+
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Територия ZOO{% endblock %}</title>
+    <link rel="icon" href="static/img/favicon.ico">
+    <link rel="stylesheet" type="text/css"
+    href="{% static 'css/index.css' %}">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=API_KEY" type="text/javascript"></script>
+</head>
+<body>
+<header>
+    <div class="first-header">
+        <div class="adress_1"><img class="nav_icon1" src="{% static 'img/1.svg' %}" alt="">
+            <p>Минск, ул. Чюрлёниса, 6.</p></div>
+        <div class="adress_1"><img class="nav_icon2" src="{% static 'img/2.svg' %}" alt="">
+            <p>Пон.-Пят. 10:00-21:00 | Суб.-Вос. 10:00-20:00</p></div>
+        <div class="adress_2"><img class="nav_icon2" src="{% static 'img/3.svg' %}" alt="">
+            <strong>+ 375 (44) 501 03 55</strong><a href="#" class="a_icon_hed1"><img class="nav_icon2" src="{% static 'img/4.svg' %}" alt=""></a></div>
+        <div class="adress_1"><a class="a_hed1" href="#">Обратный звонок</a></div>
+
+    </div>
+    <div class="second-header">
+        <div class="adress_1"><img class="logo" src="{% static 'img/logo.jpg' %}" alt="">
+        </div>
+        <div class="input_header"><input class="input_h" placeholder="Поиск" type="text" value=""></div>
+        <div class="adress_1"><a class="a_hed2" href="/">Главная</a></div>
+        <div class="adress_1"><a class="a_hed2"  onClick="get_all_product(event)" href="#catalog">Каталог</a></div>
+        <div class="adress_1"><a class="a_hed2" href="#">Акции</a></div>
+        <div class="adress_1"><a class="a_hed2" href="#">Статьи</a></div>
+        <div class="adress_1"><a class="a_hed2" href="{% url 'catalog:register' %}">Регистрация</a></div>
+        <div class="adress_1"><a class="a_hed2" href="{% url 'catalog:login' %}">Вход</a></div>
+        {% if user.is_authenticated  %}
+        <div class="adress_1"><a class="a_hed2" href="{% url 'catalog:logout' %}">Выход</a></div>
+        {% endif %}
+        <div class="adress_1"><div class="korz"><a href="#" class="a_icon_hed1"><img class="nav_icon3" src="{% static 'img/1.jpg' %}" alt=""></a>
+            <p>1</p></div></div>
+    </div>
+
+</header>
+
+<div class="content" id="content">{% block content %}
+
+    <div id="category_animal"></div>
+
+    <div id="all_need"></div>
+
+    <div id="all_product"></div>
+
+    <div id="akcii" class="all_product"></div>
+
+
+    <div id="new_product"></div>
+
+
+    <div id="brand"></div>
+
+    <div class="feedbacks" id="feedback"></div>
+
+    <div id="articles"></div>
+
+    <div class="all_need">
+        <div class="last0">
+            <div>
+                <h1 class="h1_1">Здравствуйте, счастливый хозяин любимого питомца!</h1>
+                <p>Меня зовут Ирина, 2 года назад моя бесконечная любовь к животным трансформировалась в магазин
+                    «Территория ZOO». Место, главная цель которого — забота о полноценной жизни питомцев, здоровой,
+                    долгой, радостной и гармоничной. Наш долг — создавать лучшее предложение для ваших домашних любимцев.</p>
+            </div>
+            <div class="all_need1">
+                <div class="last1"></div>
+                <div class="all_need3"><strong>За 7 минут соберем заказ</strong> <br> Выбирайте товары на сайте, забирайте в удобное время в нашем
+                    магазине. Уже через 30 минут собранный и упакованный заказ будет ждать вас.</div></div>
+            <div class="all_need1">
+                <div class="last2"></div>
+                <div class="all_need3"><strong>Поможем с выбором товаров</strong> <br> Задавайте вопросы профессионалам, получайте консультации по кормлению и содержанию питомца.</div></div>
+            <div class="all_need1">
+                <div class="last3"></div>
+                <div class="all_need3"><strong>Поставим товар на заказ!</strong> <br> Мы работаем с лучшими поставщиками сертифитированного товара для животных. Если нужного Вам товара не будет
+                    в наличии мы в кратчайшие сроки договоримся о его поставке и сообщим Вам.</div>
+            </div>
+
+        </div>
+        <div>
+            <img class="" src="{% static 'img/8.jpg' %}" alt="">
+        </div>
+    {% endblock %}</div>
+
+
+
+{% block info %}
+<div class="info">
+    <div id="map"></div>
+    <div class="info_again">
+        <div class="info_free"><h2>Бесплатно проконсультируем по любому вопросу связанному с вашим любимцем</h2></div>
+        <div class="info_else"><strong>Адрес:</strong>
+            <p><img class="nav_icon1" src="{% static 'img/1.svg' %}" alt="">Минск, ул. Чюрлёниса, 6.</p>
+            </div>
+        <div class="info_else"><strong>Время работы:</strong>
+            <p><img class="nav_icon2" src="{% static 'img/2.svg' %}" alt="">
+            Пон.-Пят. 10:00-21:00 | Суб.-Вос. 10:00-20:00</p></div>
+        <div class="info_else"><p><strong>Телефон:</strong></p><img class="nav_icon2" src="{% static 'img/3.svg' %}" alt="">
+            <strong>+ 375 (44) 501 03 55</strong><br></div>
+        <div class="info_else"><p></p><strong>Пишите нам в социальных сетях:</strong>
+        <p><a href="#" class=""><img class="" src="{% static 'img/4.svg' %}" alt=""></a></p></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="article_detail">
+
+</div>
+<div id="push">
+
+</div>{% endblock %}
+
+<footer>
+    <div class="foot1">
+        <div class="adress_1"><img class="logo2" src="{% static 'img/logo2.jpg' %}" alt=""></div>
+        <div class="foot">
+            <div class="adress_1"><a class="a_foot1" href="/">Главная</a></div>
+            <div class="adress_1"><a class="a_foot1" onClick="get_all_product(event)">Каталог</a></div>
+            <div class="adress_1"><a class="a_foot1" href="#">Акции</a></div>
+            <div class="adress_1"><a class="a_foot1" href="#">Статьи</a></div>
+            <div class="adress_1"><a class="a_foot1" href="{% url 'catalog:register' %}">Регистрация</a></div>
+            <div class="adress_1"><a class="a_hed2" href="{% url 'catalog:login' %}">Вход</a></div>
+            {% if user.is_authenticated  %}
+            <div class="adress_1"><a class="a_hed2" href="{% url 'catalog:logout' %}">Выход</a></div>
+            {% endif %}
+        </div>
+
+
+    </div>
+    <div class="foot2"></div>
+
+
+    <div class="foot3">
+        <div class="adress_1"><img class="nav_icon1" src="{% static 'img/1.svg' %}" alt="">
+            <p>Минск, ул. Чюрлёниса, 6.</p></div>
+        <div class="adress_1"><img class="nav_icon2" src="{% static 'img/2.svg' %}" alt="">
+            <p>Пон.-Пят. 10:00-21:00 | Суб.-Вос. 10:00-20:00</p></div>
+        <div class="adress_2"><img class="nav_icon2" src="{% static 'img/3.svg' %}" alt="">
+            <strong>+ 375 (44) 501 03 55</strong><a href="#" class="a_icon_hed1"><img class="nav_icon2" src="{% static 'img/4.svg' %}" alt=""></a></div>
+        <div class="adress_1"><a class="a_hed1" href="#">Обратный звонок</a></div>
+
+    </div>
+
+
+
+</footer>
+<script type="text/javascript">
+
+	ymaps.ready(init);
+	var myMap;
+
+	function init() {
+
+		myMap = new ymaps.Map("map", {
+			center: [53.85440831689402,27.478958650272087], // Координаты центра карты
+			zoom: 16 // Маштаб карты
+		});
+
+		myMap.controls.add(
+			new ymaps.control.ZoomControl()  // Добавление элемента управления картой
+		);
+
+		myPlacemark = new ymaps.Placemark([53.85440831689402,27.478958650272087], { // Координаты метки объекта
+			balloonContent: "<div class='ya_map'>Территория ZOO!</div>" // Подсказка метки
+		}, {
+			preset: "twirl#redDotIcon" // Тип метки
+		});
+
+		myMap.geoObjects.add(myPlacemark); // Добавление метки
+		myPlacemark.balloon.open(); // Открытие подсказки метки
+
+	};
+
+</script>
+<script src="{% static 'js/article.js' %}"></script>
+<script src="{% static 'js/feedback.js' %}"></script>
+<script src="{% static 'js/brand.js' %}"></script>
+<script src="{% static 'js/new_product.js' %}"></script>
+<script src="{% static 'js/akcii.js' %}"></script>
+<script src="{% static 'js/all_product.js' %}"></script>
+<script src="{% static 'js/get_all_product.js' %}"></script>
+<script src="{% static 'js/all_need.js' %}"></script>
+<script src="{% static 'js/category_animal.js' %}"></script>
+<script src="{% static 'js/get_product_div.js' %}"></script>
+<script src="{% static 'js/product_detail.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
